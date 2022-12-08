@@ -1,40 +1,42 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { useState, useEffect } from 'react'
 import type { BasicProfile } from "@datamodels/identity-profile-basic";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
-import ceramicLogo from '../public/ceramic.png'
-import { useCeramicContext, datastore } from '../context'
-import { authenticateCeramic } from '../utils'
-import styles from '../styles/Home.module.css'
+import { datastore, useCeramicContext } from "../context";
+import ceramicLogo from "../public/ceramic.png";
+import styles from "../styles/Home.module.css";
+import { authenticateCeramic } from "../utils";
 
 const Home: NextPage = () => {
-  const ceramic = useCeramicContext() // access our Ceramic instance from `../context/index.tsx
-  const [profile, setProfile] = useState<BasicProfile | undefined>()
+  // Check for ceramic state
+
+  const ceramic = useCeramicContext(); // access our Ceramic instance from `../context/index.tsx
+  const [profile, setProfile] = useState<BasicProfile | undefined>();
 
   const handleLogin = async () => {
-    await authenticateCeramic(ceramic)
-    await getProfile()
-  }
+    await authenticateCeramic(ceramic);
+    await getProfile();
+  };
 
   const getProfile = async () => {
-    if(ceramic.did !== undefined) {
-      const profile = await datastore.get('basicProfile')
-      setProfile(profile)
+    if (ceramic.did !== undefined) {
+      const profile = await datastore.get("basicProfile");
+      setProfile(profile);
     }
-  }
-  
+  };
+
   /**
    * On load check if there is a DID-Session in local storage.
    * If there is a DID-Session we can immediately authenticate the user.
    * For more details on how we do this check the 'authenticateCeramic function in`../utils`.
    */
   useEffect(() => {
-    if(localStorage.getItem('did')) {
-      handleLogin()
+    if (localStorage.getItem("did")) {
+      handleLogin();
     }
-  }, [ ])
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -51,6 +53,7 @@ const Home: NextPage = () => {
           width="100"
           height="100"
           className={styles.logo}
+          alt="Ceramic logo..."
         />
         {profile === undefined ? (
           <button
@@ -134,6 +137,6 @@ const Home: NextPage = () => {
       </footer>
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
