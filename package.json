@@ -20,7 +20,9 @@
     "key-did-resolver": "^1.4.0",
     "next": "^12.0.4",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.4"
   },
   "devDependencies": {
     "@datamodels/identity-profile-basic": "^0.2.0",

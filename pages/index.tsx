@@ -36,6 +36,7 @@ const Home: NextPage = () => {
     if (localStorage.getItem("did")) {
       handleLogin();
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -125,12 +126,20 @@ const Home: NextPage = () => {
       </main>
       <footer className={styles.footer}>
         <div>
-          <a href="https://developers.ceramic.network" target="_blank">
+          <a
+            href="https://developers.ceramic.network"
+            target="_blank"
+            rel="noreferrer"
+          >
             Learn about Ceramic
           </a>
         </div>
         <div>
-          <a href="https://forum.ceramic.network" target="_blank">
+          <a
+            href="https://forum.ceramic.network"
+            target="_blank"
+            rel="noreferrer"
+          >
             Ask Questions
           </a>
         </div>
